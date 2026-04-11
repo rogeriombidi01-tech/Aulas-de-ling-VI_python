@@ -44,33 +44,31 @@ def validar_tipos(*expected_types):
             if len(args) != len(expected_types): 
                 raise TypeError(f"Esperava {len(expected_types)} argumentos posicionais, mas recebeu {len(args)}.") 
             
-            # Valida o tipo de cada argumento
+            #valida o tipo de cada argumento
             for arg, expected_type in zip(args, expected_types): 
                 if not isinstance(arg, expected_type): 
                     raise TypeError(f"Argumento '{arg}' deve ser do tipo {expected_type.__name__}, mas é {type(arg).__name__}.") 
             
-            # CORREÇÃO: O return da função original deve estar FORA do for.
-            # Assim, ele só executa após validar TODOS os argumentos.
+            # return da função original fora do ciclo for
+            
             return func(*args, **kwargs) 
             
         return wrapper 
     return decorator 
 
-# --- Funções Decoradas ---
+# funções decoradas
 
 @validar_tipos(int, int) 
 def somar(a, b): 
     return a + b 
-
-# CORREÇÃO: A ordem no decorator deve ser (list, str) para bater com (lista_str, item)
+#  
 @validar_tipos(list, str) 
 def adicionar_item(lista_str, item): 
     lista_str.append(item) 
     return lista_str 
 
-# --- Testes de Execução ---
-
-print("\n--- Teste Somar ---") 
+# testes e execuções das funções 
+print("\n Teste somar") 
 try:
     resultado_soma = somar(2, 3)
     print(f"Soma (2, 3): {resultado_soma}") 
@@ -80,13 +78,13 @@ try:
 except TypeError as e: 
     print(f"Erro esperado ao somar: {e}") 
 
-print("\n--- Teste Adicionar Item ---") 
+print("\n Teste Adicionar Item") 
 try:
     minha_lista = ["a", "b"] 
-    # Agora a ordem está correta: lista primeiro, depois a string 'c'
+    
     print(f"Lista após adicionar 'c': {adicionar_item(minha_lista, 'c')}") 
 
-    # Teste de erro proposital
+    # Testes  de erros propositadas 
     adicionar_item("isso_e_uma_string", "d") 
 except TypeError as e: 
     print(f"Erro esperado ao adicionar item: {e}") 
