@@ -29,7 +29,6 @@ for p in permutar(lista_letras):
 # Saída esperada: 
 # ["A", "B"] 
 # ["B", "A"]"""
-
 def permutar(lista):
     if len(lista) <= 1:
         yield lista
