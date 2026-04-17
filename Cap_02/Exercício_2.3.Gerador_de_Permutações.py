@@ -29,6 +29,8 @@ for p in permutar(lista_letras):
 # Saída esperada: 
 # ["A", "B"] 
 # ["B", "A"]"""
+
+# Em Poucas lihas este codigo faz a permutação de de valores de entradas
 def permutar(lista):
     if len(lista) <= 1:
         yield lista
